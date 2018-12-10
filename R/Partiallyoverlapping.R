@@ -12,6 +12,7 @@
 #' @param x4 a vector of paired observations in Sample 2 (not applicable if stacked = "TRUE")
 #' @param var.equal a logical variable indicating whether to treat the two variances as being equal. If "TRUE" then the pooled variance is used to estimate the variance, otherwise the Welch approximation to the degrees of freedom is used. 
 #' @param alternative a character string specifying the alternative hypothesis, must be one of "two.sided" (default), "greater" or "less".
+#' @param mu difference in population means under the null hypothesis
 #' @param conf.level confidence level of the interval.
 #' @param stacked indicator of whether paired and unpaired observations are stacked within one vector ("TRUE"), or if specified as four separate vectors (default)
 #' 
@@ -45,10 +46,11 @@
 #' b<-c(NA,NA,NA,NA,NA,NA,NA,NA,10,16,18,16,15,14,13,10,15,10,15,17,13,19,12,13)
 #' Partover.test(a,b,var.equal=TRUE,stacked=TRUE) 
 #' #p.value = 0.026, the samples from group "a" and group "b" have significantly different means
+#' 
 #' @export 
 
 
-Partover.test<-function(x1=NULL,x2=NULL,x3=NULL,x4=NULL,var.equal=FALSE, alternative="two.sided", conf.level=NULL, stacked=FALSE){
+Partover.test<-function(x1=NULL,x2=NULL,x3=NULL,x4=NULL,var.equal=FALSE, mu=0,alternative="two.sided", conf.level=NULL, stacked=FALSE){
   #Seperates observations into format required for stacked = FALSE.
   if (stacked==TRUE){
     if (length(x1)!=length(x2)) stop ("samples must be specified of equal lengths within the matrix for stacked=FALSE. Check structure of data") #The length of a and b must be equal. 
@@ -86,7 +88,7 @@ Partover.test<-function(x1=NULL,x2=NULL,x3=NULL,x4=NULL,var.equal=FALSE, alterna
     denom.1<- (1/n1) +(1/n2)
     denom.2 <- 2*r*n12 / (n1 *n2)
     denom<- spooled *sqrt(denom.1 - denom.2)
-    statistic <- estimate / denom
+    statistic <- (estimate - mu) / denom
     parameter<-(length (x3) -1) +(((length (x1) + length (x2) + length (x3) -1)/(length (x1) + length (x2) +(2*length (x3))))*(length (x1) + length (x2)))
   }
   
@@ -95,7 +97,7 @@ Partover.test<-function(x1=NULL,x2=NULL,x3=NULL,x4=NULL,var.equal=FALSE, alterna
     denom.1<- (stats::var(c(x1,x3))/n1) +(stats::var(c(x2,x4))/n2)
     denom.2 <- (2*r*n12*stats::sd(c(x1,x3))*stats::sd(c(x2,x4))) / (n1 *n2)
     denom<- sqrt(denom.1 - denom.2)
-    statistic <- estimate / denom
+    statistic <- (estimate - mu) / denom
     welapprox<- (((stats::var(c(x1,x3))/n1)+(stats::var(c(x2,x4))/n2))^2)/((((stats::var(c(x1,x3))/n1)^2)/(n1-1))+(((stats::var(c(x2,x4))/n2)^2 )/(n2-1)))
     parameter <- (n12 -1) + (((welapprox - n12 +1)/(length (x1) + length (x2) +(2*n12)))*( length (x1) + length (x2)))    
   }
@@ -141,4 +143,5 @@ Partover.test<-function(x1=NULL,x2=NULL,x3=NULL,x4=NULL,var.equal=FALSE, alterna
   }
   return(theoutputs) 
 }
+
 

@@ -5,8 +5,8 @@
 \title{The partially overlapping samples t-test}
 \usage{
 Partover.test(x1 = NULL, x2 = NULL, x3 = NULL, x4 = NULL,
-  var.equal = FALSE, alternative = "two.sided", conf.level = NULL,
-  stacked = FALSE)
+  var.equal = FALSE, mu = 0, alternative = "two.sided",
+  conf.level = NULL, stacked = FALSE)
 }
 \arguments{
 \item{x1}{a vector of unpaired observations in Sample 1 (or all observations in Sample 1 if stacked = "TRUE")}
@@ -18,6 +18,8 @@ Partover.test(x1 = NULL, x2 = NULL, x3 = NULL, x4 = NULL,
 \item{x4}{a vector of paired observations in Sample 2 (not applicable if stacked = "TRUE")}
 
 \item{var.equal}{a logical variable indicating whether to treat the two variances as being equal. If "TRUE" then the pooled variance is used to estimate the variance, otherwise the Welch approximation to the degrees of freedom is used.}
+
+\item{mu}{difference in population means under the null hypothesis}
 
 \item{alternative}{a character string specifying the alternative hypothesis, must be one of "two.sided" (default), "greater" or "less".}
 
@@ -69,5 +71,5 @@ a<-c(20,21,16,18,14,12,14,17,NA,NA,NA,NA,NA,NA,NA,NA,14,15,18,20,11,19,14,15)
 b<-c(NA,NA,NA,NA,NA,NA,NA,NA,10,16,18,16,15,14,13,10,15,10,15,17,13,19,12,13)
 Partover.test(a,b,var.equal=TRUE,stacked=TRUE) 
 #p.value = 0.026, the samples from group "a" and group "b" have significantly different means
-}
 
+}

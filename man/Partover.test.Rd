@@ -38,7 +38,7 @@ p.value  ~~ The p-value for the test
 
 estimate ~~ The estimated difference in the means
 
-conf.int ~~ A confidence interval for the mean appropriate to the specified alternative hypothesis
+conf.int ~~ A confidence interval for the mean difference appropriate to the specified alternative hypothesis
 }
 \description{
 Performs a comparison of means using the partially overlapping t-test, for two samples each with paired and unpaired observations.
@@ -50,9 +50,16 @@ If the structure of your data is of two vectors, one for each sample, then the o
 \details{
 The formula is only applicable for the 2 sample partially overlapping samples t-test. The number of unpaired observations may be zero for up to one of the two samples. The number of paired observations must be of equal length of two or greater. Error messages are generated when these conditions are not true
 
-If your observations are from a datframe of two paired samples with missing observations, use the option "stacked=TRUE". Correpsonding pairs should be given on the same row when this option is applied.
+If your observations are from a data frame of two paired samples with missing observations, use the option "stacked=TRUE". Corresponding pairs should be given on the same row when this option is applied.
 }
 \examples{
+
+# Example taken from Derrick, Toher and White (2017)
+# How to compare the means of two samples that include
+# paired observations and independent observations:
+# A companion to Derrick, Russ, Toher and White (2017).
+# The Quantitative Methods in Psychology, 13(2). pp.120-126.
+
 #The sample means for two groups, "a" and "b" are compared
 #for a two sided test assuming equal variances.
 

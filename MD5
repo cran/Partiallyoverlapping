@@ -1,4 +1,5 @@
-e9420bbcb7c99e755b622eff0ce9e78f *DESCRIPTION
-25c3c3f923e0b136ebddd987796fe7ab *NAMESPACE
-4420e19e81459f24605d9351eeb2a818 *R/Partiallyoverlapping.R
-cce3775a02d156768d1fec7cb1ce8fab *man/Partover.test.Rd
+c01997ad41a283df34ad10d720e3a299 *DESCRIPTION
+e86bc27ef3edf1c782d6323b726ffe51 *NAMESPACE
+ecbcd04b5757dfd849e2a135299210e8 *R/Partiallyoverlapping.R
+adbb3a491e40181259be1628915465f3 *man/Partover.test.Rd
+1219fd0161f1f89f835a03725d7b76e3 *man/Prop.test.Rd
